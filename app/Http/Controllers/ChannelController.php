@@ -38,9 +38,18 @@ class ChannelController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Channel $channel)
     {
-        //
+        if($request->hasFile('image')){
+
+            $channel->clearMediaCollection('images');
+            //clear the old or remove old and get new One
+
+            $channel->addMediaFromRequest('image')->toMediaCollection('images');
+
+        }
+
+
     }
 
 
