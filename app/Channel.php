@@ -18,12 +18,22 @@ class Channel extends Model implements HasMedia
     }
 
 
+    public function editTable(){
+
+        if(! auth()->check()) return false;
+
+        return $this->user_id  == auth()->user()->id;
+
+    }
+
+
     public function image()
     {
-        if ($this->media->first()) {
-            return $this->media->first()->getFullUrl('thumb');
+        if ($this->media()->first()) {
+            return $this->media()->first()->getFullUrl('thumb');
         }
         return null;
+        //media is function relationship
     }
 
 
